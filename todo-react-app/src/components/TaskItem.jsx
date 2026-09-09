@@ -4,16 +4,22 @@ function TaskItem({task, removeTask, toggleTask}) {
     return (
         <>
             <li className={task.completed ? "task completed" : "task"}>
-                {task.text}
+                <span>
+                    {task.text}
+                </span>
+
+                <span className="task-date">
+                    {(new Date(task.timeStamp)).toLocaleString()}
+                </span>
 
                 <input 
-                type="checkbox" 
-                name="completed" 
-                id="completed" 
-                onChange={() => toggleTask(task.id)}
-            />
+                    type="checkbox" 
+                    name="completed" 
+                    id="completed" 
+                    onChange={() => toggleTask(task.id)}
+                />
 
-            <button onClick={() => removeTask(task.id)}>X</button>
+                <button onClick={() => removeTask(task.id)}>X</button>
             </li>
 
         </>

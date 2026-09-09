@@ -5,6 +5,17 @@ import TaskList from './components/TaskList'
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState("all");
+
+  let filteredTasks = tasks;
+
+  if (filter === "completed") {
+    filteredTasks = tasks.filter(task => task.completed);
+  }
+
+  if (filter === "active") {
+    filteredTasks = tasks.filter(task => !task.completed);
+  }
 
   function addTask(text) {
     setTasks(
@@ -13,6 +24,7 @@ function App() {
           id: Date.now(),
           text: text,
           completed: false,
+          timeStamp: Date.now(),
         },
 
         ...tasks,
@@ -43,18 +55,16 @@ function App() {
     )
   }
 
-  function selectFilter() {
-    
-  }
-
   return <>
     <div className='main-container'>
       <TaskForm 
         addTask={addTask}
+        filter={filter}
+        onFilterChange={setFilter}
       />
 
       <TaskList 
-        tasks={tasks} 
+        tasks={filteredTasks} 
         removeTask={removeTask} 
         toggleTask={toggleTask}
       />

@@ -57,9 +57,15 @@ li {
 
 .task {
   display: grid;
-  grid-template-columns: 1fr .05fr .05fr;
+  grid-template-columns: .6fr .3fr .05fr .05fr;
   background: hsl(0, 0%, 85%);
   padding: 8px;
   gap: 8px;
   border-radius: 8px;
+  align-items: center;
+}
+
+.task-date {
+  opacity: .7;
+  font-size: 90%;
 }

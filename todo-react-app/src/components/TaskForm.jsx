@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function TaskForm({addTask}) {
+function TaskForm({addTask, filter, onFilterChange}) {
     const [text, setText] = useState("");
 
     function handleAddTask() {
@@ -21,10 +21,15 @@ function TaskForm({addTask}) {
 
             <button onClick={handleAddTask}>Добавить</button>
 
-            <select name="filter" id="filter">
+            <select 
+                name="filter" 
+                id="filter"
+                value={filter}
+                onChange={e => onFilterChange(e.target.value)}
+            >
                 <option value="all">Все</option>
                 <option value="completed">Выполненные</option>
-                <option value="incompleted">Невыполненные</option>
+                <option value="active">Невыполненные</option>
             </select>
         </div>
     )
