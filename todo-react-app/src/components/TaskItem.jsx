@@ -16,6 +16,7 @@ function TaskItem({task, removeTask, toggleTask}) {
                     type="checkbox" 
                     name="completed" 
                     id="completed" 
+                    checked={task.completed}
                     onChange={() => toggleTask(task.id)}
                 />
 

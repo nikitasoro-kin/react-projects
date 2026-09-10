@@ -1,10 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import TaskForm from './components/TaskForm'
 import TaskList from './components/TaskList'
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    
+    if (savedTasks) {
+      return JSON.parse(savedTasks);
+    }
+  });
+
   const [filter, setFilter] = useState("all");
 
   let filteredTasks = tasks;
@@ -54,6 +61,10 @@ function App() {
       }) 
     )
   }
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks])
 
   return <>
     <div className='main-container'>
