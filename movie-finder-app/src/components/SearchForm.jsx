@@ -1,16 +1,36 @@
-const API_KEY = import.meta.env.VITE_API_KEY
+import { useState } from "react"
 
-function SearchForm() {
+function SearchForm( {onSearch, title, setTitle, year, setYear} ) {
 
     return (
         <>
-            <h2>Find a movie!</h2>
+            <div className="form-container">
+                <h2>Find a movie!</h2>
 
-            <input 
-                type="text" 
-            />
+                <div>
+                    <p>Name:</p>
+                    <input 
+                        type="text"
+                        value={title}
+                        onChange={e => {
+                            setTitle(e.target.value)
+                        }}
+                    />
+                </div>
 
-            <button>Search</button>
+                <div>
+                    <p>Year:</p>
+                    <input 
+                        type="text" 
+                        value={year}
+                        onChange={e => {
+                            setYear(e.target.value)
+                        }}
+                    />
+                </div>
+
+                <button onClick={onSearch}>Search</button>
+            </div>
         </>
     )
 }

@@ -1,0 +1,87 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*--------------FORM CONTAINER--------------*/
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    flex-direction: column;
+    background: hsl(0, 0%, 75%);
+    width: 20%;
+    padding: 32px;
+    margin: 16px;
+    border: 2px solid black;
+    border-radius: 16px;
+    gap: 16px;
+}
+
+.form-container div {
+    background: hsl(0, 0%, 91%);
+    padding: 8px;
+    border: 1px solid hsl(0, 0%, 91%);
+    border-radius: 8px;
+}
+
+.form-container div input {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 2px 2px 5px 0px hsl(0, 0%, 41%);
+    padding: 3px;
+}
+
+.form-container div input:focus {
+    border: 1px solid black;
+    outline: none;
+}
+
+.form-container button {
+    padding: 12px 64px;
+    background: hsl(0, 0%, 91%);
+    border: 1px solid black;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px 0px hsl(0, 0%, 41%);
+}
+
+
+
+
+
+/*--------------CARD CONTAINER--------------*/
+
+.card-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    flex-direction: column;
+    background: hsl(0, 0%, 75%);
+    width: 30%;
+    padding: 16px 8px;
+    margin: 32px;
+    border: 2px solid black;
+    border-radius: 16px;
+    gap: 32px;
+}
+
+.card-container div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-container .card-year {
+    font-size: 150%;
+    opacity: .7;
+    
+}
+
+.card-container div p span {
+    font-weight: 750;
+}
