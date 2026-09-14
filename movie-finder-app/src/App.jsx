@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchForm from './components/SearchForm';
 import MovieCard from './components/MovieCard';
 import Error from './components/Error';
+import History from './components/History';
 import './App.css';
 
 const API_KEY = import.meta.env.VITE_API_KEY
@@ -10,7 +11,27 @@ function App() {
   const [title, setTitle] = useState("");
   const [year, setYear] = useState("");
 
+  const [movieList, setMovieList] = useState(() => {
+    const savedMovies = localStorage.getItem("movies");
+
+    if (savedMovies) {
+      return JSON.parse(savedMovies);
+    }
+
+    return [];
+  });
+
   const [movie, setMovie] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem("movies", JSON.stringify(movieList));
+  }, [movieList])
+
+  function deleteMovie(id) {
+    setMovieList(movieList.filter(movie => {
+      return movie.imdbID != id;
+    }));
+  }
 
   const searchMovie = async () => {
       let url = `http://www.omdbapi.com/?apikey=${API_KEY}`;
@@ -27,10 +48,14 @@ function App() {
           const response = await fetch(url);
           const data = await response.json();
 
-          console.log(data);
-
           if (data) {
             setMovie(data);
+
+            if (data.Response === "True") {
+              setMovieList(prev => [...prev, data]);
+            }
+
+            console.log(movieList);
           }
       } catch (error) {
           console.log(error);
@@ -38,26 +63,34 @@ function App() {
   }
 
   return (
-    <>
-      <SearchForm 
-        onSearch={searchMovie}
-        title={title}
-        setTitle={setTitle}
-        year={year}
-        setYear={setYear}
+    <div className='layout-container'>
+      <History 
+        movieList={movieList}
+        onMovieDelete={deleteMovie}
       />
 
-      {movie?.Response === 'True' ? 
-        <MovieCard
-          movie={movie}
+      <div>
+        <SearchForm 
+          onSearch={searchMovie}
+          title={title}
+          setTitle={setTitle}
+          year={year}
+          setYear={setYear}
         />
-      
-      :
-        <Error
-          message={movie?.Error}
-        />
-      }
-    </>
+
+        {movie?.Response === 'True' ? 
+          <MovieCard
+            movie={movie}
+          />
+        
+        :
+          <Error
+            message={movie?.Error}
+          />
+        }
+      </div>
+
+    </div>
   )
 }
 

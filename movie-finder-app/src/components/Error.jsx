@@ -1,11 +1,11 @@
 
 function Error( {message} ) {
     return (
-        <>
-            <div>
+        <div className="error-container">
+            <div className="error-message">
                 {message}
             </div>
-        </>
+        </div>
     )
 }
 

@@ -8,7 +8,7 @@ function SearchForm( {onSearch, title, setTitle, year, setYear} ) {
                 <h2>Find a movie!</h2>
 
                 <div>
-                    <p>Name:</p>
+                    <p>Title:</p>
                     <input 
                         type="text"
                         value={title}
