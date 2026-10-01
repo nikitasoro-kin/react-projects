@@ -4,10 +4,13 @@ import MovieCard from './components/MovieCard';
 import Error from './components/Error';
 import History from './components/History';
 import './App.css';
+import Loader from './components/Loader';
 
 const API_KEY = import.meta.env.VITE_API_KEY
 
 function App() {
+  const [loading, setLoading] = useState(false);
+
   const [title, setTitle] = useState("");
   const [year, setYear] = useState("");
 
@@ -34,6 +37,8 @@ function App() {
   }
 
   const searchMovie = async () => {
+      setMovie(null);
+      setLoading(true);
       let url = `http://www.omdbapi.com/?apikey=${API_KEY}`;
 
       if (title) {
@@ -59,7 +64,13 @@ function App() {
           }
       } catch (error) {
           console.log(error);
+      } finally {
+          setLoading(false);
       }
+  }
+
+  function displayItem(movie) {
+    setMovie(movie);
   }
 
   return (
@@ -67,6 +78,7 @@ function App() {
       <History 
         movieList={movieList}
         onMovieDelete={deleteMovie}
+        onItemDisplay={displayItem}
       />
 
       <div>
@@ -78,6 +90,7 @@ function App() {
           setYear={setYear}
         />
 
+        {loading && <Loader/>}
         {movie?.Response === 'True' ? 
           <MovieCard
             movie={movie}

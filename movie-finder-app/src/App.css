@@ -172,3 +172,62 @@ aside h2 {
     display: flex;
     justify-content: center;
 }
+
+
+/*--------------LOADER--------------*/
+
+.loader-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    height: 50px;
+    width: 50px;
+    background: hsl(0, 0%, 54%);
+    border-radius: 50%;
+}
+
+.l1 {
+    animation: loading-left 1s ease-in-out 0.2s infinite alternate;
+}
+
+.l2 {
+    animation: loading-right 1s ease-in-out 0.2s infinite alternate;
+}
+
+@keyframes loading-left {
+    0% {
+        transform: translateX(0%) scale(1);
+    }
+
+    50% {
+        transform: translateX(50%) scale(.4);
+        opacity: .5;
+    }
+
+    100% {
+        transform: translateX(100%) scale(1);
+        opacity: 1;
+        background: hsl(0, 0%, 34%);
+    }
+}
+
+@keyframes loading-right {
+    0% {
+        transform: translateX(0%) scale(1);
+    }
+
+    50% {
+        transform: translateX(-50%) scale(.4);
+        opacity: .5;
+    }
+
+    100% {
+        transform: translateX(-100%) scale(1);
+        opacity: 1;
+        background: hsl(0, 0%, 34%);
+    }
+}

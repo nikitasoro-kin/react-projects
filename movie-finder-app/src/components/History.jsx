@@ -1,4 +1,4 @@
-function History( {movieList, onMovieDelete} ) {
+function History( {movieList, onMovieDelete, onItemDisplay} ) {
 
     return (
         <>
@@ -10,8 +10,11 @@ function History( {movieList, onMovieDelete} ) {
                         {
                             movieList.map(movie => {
                                 return (
-                                    <li key={movie.imdbID} className="history-item">
-                                        <div>
+                                    <li 
+                                        key={movie.imdbID} 
+                                        className="history-item"
+                                    >
+                                        <div onClick={() => onItemDisplay(movie)}>
                                             {movie.Title}
                                             <div className="item-discription">
                                                 Director: {movie.Director}
